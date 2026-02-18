@@ -28,8 +28,23 @@ function formatDateTimeForICS(date) {
 function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError, isSuccess, onAddToCalendar, onResetSuccess }) {
   const [fullName, setFullName] = useState('');
   const [zone, setZone] = useState('');
-  const [batch, setBatch] = useState('Batch A1');
+  const [batch, setBatch] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('')
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
 
   if (!open) {
     return null;
@@ -44,7 +59,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!fullName.trim() || !zone.trim() || !email.trim() || !batch) {
+    if (!fullName.trim() || !zone.trim() || !email.trim() || !batch || !phoneNumber.trim()) {
       return;
     }
 
@@ -54,6 +69,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         zone: zone.trim(),
         batch,
         email: email.trim(),
+        phoneNumber: phoneNumber.trim(),
       }
     );
 
@@ -69,7 +85,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
         onClick={handleOverlayClick}
       >
-        <div className="bg-white dark:bg-[#1a2e20] rounded-2xl max-w-md w-full shadow-2xl overflow-hidden border border-primary/10 text-center px-8 py-10 flex flex-col items-center gap-6">
+        <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] md:max-h-[80vh] shadow-2xl overflow-y-auto border border-primary/10 text-center px-6 py-8 flex flex-col items-center gap-6">
           <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center shadow-inner shadow-emerald-200 mb-2">
             <span className="material-symbols-outlined text-6xl text-primary">check_circle</span>
           </div>
@@ -109,11 +125,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white dark:bg-[#1a2e20] rounded-xl max-w-[520px] w-full shadow-2xl overflow-hidden border border-primary/10">
+      <div className="bg-white rounded-xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
         {/* Modal Header */}
-        <div className="px-8 pt-8 pb-6 border-b border-gray-100 dark:border-primary/10">
+        <div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-primary/10 flex-shrink-0">
           <div className="flex justify-between items-start mb-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center">
                 <img src="/Logo.png" alt="NCCF CRS Logo" className="h-10 w-10 rounded-lg" />
                 <div className="text-[#111813] text-[8px] font-bold tracking-tight leading-tight border-l-3 border-black pl-1">
                   <div>NCCF</div>
@@ -137,12 +153,14 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           </p>
         </div>
 
-        {/* Registration Form */}
-        <form className="px-8 pb-4 space-y-5" onSubmit={handleSubmit}>
+        {/* Modal Body - Scrollable */}
+        <div className="flex-1 overflow-y-auto">
+          {/* Registration Form */}
+          <form className="px-6 pb-4 space-y-4" onSubmit={handleSubmit}>
           {submitError && (
-            <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800 flex gap-3">
+            <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 flex gap-3">
               <span className="material-symbols-outlined text-red-600 text-[20px]">error</span>
-              <p className="text-xs text-red-600 dark:text-red-400 leading-relaxed">
+              <p className="text-xs text-red-600 leading-relaxed">
                 {submitError}
               </p>
             </div>
@@ -154,7 +172,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">person</span>
               <input
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
                 id="full-name"
                 placeholder="e.g., John Doe"
                 type="text"
@@ -162,6 +180,15 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
                 onChange={(event) => setFullName(event.target.value)}
                 required
               />
+              {fullName && (
+                <button
+                  type="button"
+                  onClick={() => setFullName('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[14px]">close</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -171,7 +198,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">mail</span>
               <input
-                className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
                 id="email"
                 placeholder="e.g., john.doe@example.com"
                 type="email"
@@ -179,18 +206,52 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
                 onChange={(event) => setEmail(event.target.value)}
                 required
               />
+              {email && (
+                <button
+                  type="button"
+                  onClick={() => setEmail('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[18px]">close</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="phoneNumber">Phone Number</label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">phone</span>
+              <input
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                id="phone"
+                placeholder="e.g., +234xxxxxxxxx"
+                type="tel"
+                value={phoneNumber}
+                onChange={(event) => setPhoneNumber(event.target.value)}
+                required
+              />
+              {phoneNumber && (
+                <button
+                  type="button"
+                  onClick={() => setPhoneNumber('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[18px]">close</span>
+                </button>
+              )}
             </div>
           </div>
 
           {/* Two Column Layout for Zone and Batch */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Zone Selection */}
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-0.5" htmlFor="zone">Zone</label>
+              <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="zone">Zone</label>
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">location_on</span>
                 <select
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
                   id="zone"
                   value={zone}
                   onChange={(event) => setZone(event.target.value)}
@@ -222,11 +283,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
 
             {/* Batch Selection */}
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-0.5" htmlFor="batch">Batch</label>
+              <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="batch">Batch</label>
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">groups</span>
                 <select
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
                   id="batch"
                   value={batch}
                   onChange={(event) => setBatch(event.target.value)}
@@ -252,16 +313,17 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           </div>
 
           {/* Additional Info/Notice */}
-          <div className="p-4 bg-primary/5 rounded-lg border border-primary/10 flex gap-3">
+          <div className="p-3 bg-primary/5 rounded-lg border border-primary/10 flex gap-3">
             <span className="material-symbols-outlined text-primary text-[20px]">info</span>
-            <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-xs text-gray-600 leading-relaxed">
               By registering, you agree to receive conference updates via email. Please ensure your details are correct before submitting.
             </p>
           </div>
         </form>
+        </div>
 
         {/* Modal Footer Actions */}
-        <div className="px-8 py-6 bg-gray-50 dark:bg-black/20 border-t border-gray-100 dark:border-primary/10 flex flex-col sm:flex-row gap-3">
+        <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex flex-col sm:flex-row gap-3 flex-shrink-0">
           <button
             type="button"
             onClick={onClose}
