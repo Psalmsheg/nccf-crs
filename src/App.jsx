@@ -11,7 +11,7 @@ import Support from './components/Support';
 import Footer from './components/Footer';
 
 const REGISTRATION_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = '6832fdd0-ed39-45de-b92e-0894e4515847';
+const WEB3FORMS_ACCESS_KEY = 'efd6f26f-23f6-4364-863d-8edd9c5691a8';
 
 function formatDateTimeForICS(date) {
   const pad = (value) => String(value).padStart(2, '0');
