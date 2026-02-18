@@ -31,6 +31,16 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
   const [batch, setBatch] = useState('Batch A1');
   const [email, setEmail] = useState('');
 
+  // Reset form when modal opens
+  useEffect(() => {
+    if (open && !isSuccess) {
+      setFullName('');
+      setZone('');
+      setBatch('Batch A1');
+      setEmail('');
+    }
+  }, [open, isSuccess]);
+
   if (!open) {
     return null;
   }
@@ -85,7 +95,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <div className="w-full flex flex-col gap-3 mt-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                setRegistrationSuccess(false);
+                setShowRegistration(false);
+                setRegistrationError('');
+              }}
               className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-full w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
             >
               Continue to portal
@@ -356,6 +370,8 @@ function App() {
         access_key: WEB3FORMS_ACCESS_KEY,
         subject: 'New NCCF CRS Conference Registration',
         from_name: 'NCCF CRS Conference Website',
+        // Add timestamp to make each submission unique
+        timestamp: new Date().toISOString(),
         ...data,
       };
 
@@ -379,6 +395,7 @@ function App() {
 
       setRegistrationSuccess(true);
     } catch (error) {
+      console.error('Registration error:', error);
       setRegistrationError('Unable to submit your registration. Please try again.');
       throw error;
     } finally {
