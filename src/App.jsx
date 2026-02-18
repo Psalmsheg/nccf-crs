@@ -25,21 +25,11 @@ function formatDateTimeForICS(date) {
   return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
 }
 
-function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError, isSuccess, onAddToCalendar }) {
+function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError, isSuccess, onAddToCalendar, onResetSuccess }) {
   const [fullName, setFullName] = useState('');
   const [zone, setZone] = useState('');
   const [batch, setBatch] = useState('Batch A1');
   const [email, setEmail] = useState('');
-
-  // Reset form when modal opens
-  useEffect(() => {
-    if (open && !isSuccess) {
-      setFullName('');
-      setZone('');
-      setBatch('Batch A1');
-      setEmail('');
-    }
-  }, [open, isSuccess]);
 
   if (!open) {
     return null;
@@ -95,11 +85,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <div className="w-full flex flex-col gap-3 mt-2">
             <button
               type="button"
-              onClick={() => {
-                setRegistrationSuccess(false);
-                setShowRegistration(false);
-                setRegistrationError('');
-              }}
+              onClick={onResetSuccess}
               className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-full w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
             >
               Continue to portal
@@ -351,8 +337,11 @@ function App() {
     };
   }, []);
 
+  const [registrationKey, setRegistrationKey] = useState(0);
+
   const handleOpenRegistration = () => {
     setShowRegistration(true);
+    setRegistrationKey(prev => prev + 1); // Force remount to reset form state
   };
 
   const handleCloseRegistration = () => {
@@ -451,6 +440,7 @@ function App() {
       </main>
       <Footer onRegisterClick={handleOpenRegistration} />
       <RegistrationModal
+        key={registrationKey}
         open={showRegistration}
         onClose={handleCloseRegistration}
         onSubmit={handleSubmitRegistration}
@@ -458,6 +448,11 @@ function App() {
         submitError={registrationError}
         isSuccess={registrationSuccess}
         onAddToCalendar={handleAddToCalendar}
+        onResetSuccess={() => {
+          setRegistrationSuccess(false);
+          setShowRegistration(false);
+          setRegistrationError('');
+        }}
       />
     </>
   );
