@@ -210,7 +210,8 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
                   <option value="Ikom">Ikom</option>
                   <option value="Ogoja">Ogoja</option>
                   <option value="Yakurr">Yakurr</option>
-                  <option value="Boki">Boki</option>
+                  <option value="Boki East">Boki East</option>
+                  <option value="Boki West">Boki West</option>
                   <option value="Obubra">Obubra</option>
                   <option value="Odukpani">Odukpani</option>
                   <option value="Bekwarra">Bekwarra</option>
