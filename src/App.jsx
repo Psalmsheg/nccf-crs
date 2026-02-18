@@ -88,7 +88,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               onClick={onClose}
               className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-full w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
             >
-              Continue to Portal
+              Continue
             </button>
             <button
               type="button"
