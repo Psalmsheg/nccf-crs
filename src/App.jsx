@@ -10,8 +10,9 @@ import Location from './components/Location';
 import Support from './components/Support';
 import Footer from './components/Footer';
 
-const REGISTRATION_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = 'efd6f26f-23f6-4364-863d-8edd9c5691a8';
+// FormSubmit configuration - UPDATE THIS EMAIL ADDRESS
+const FORMSUBMIT_EMAIL = 'your-email@example.com'; // Replace with your actual email
+const REGISTRATION_ENDPOINT = `https://formsubmit.co/${FORMSUBMIT_EMAIL}`;
 
 function formatDateTimeForICS(date) {
   const pad = (value) => String(value).padStart(2, '0');
@@ -355,34 +356,28 @@ function App() {
     setIsSubmittingRegistration(true);
 
     try {
-      const payload = {
-        access_key: WEB3FORMS_ACCESS_KEY,
-        subject: 'New NCCF CRS Conference Registration',
-        from_name: 'NCCF CRS Conference Website',
-        // Add timestamp to make each submission unique
-        timestamp: new Date().toISOString(),
-        ...data,
-      };
+      // Create FormData for FormSubmit
+      const formData = new FormData();
+      formData.append('_subject', 'New NCCF CRS Conference Registration');
+      formData.append('_template', 'table'); // Nice formatted email
+      formData.append('fullName', data.fullName);
+      formData.append('email', data.email);
+      formData.append('zone', data.zone);
+      formData.append('batch', data.batch);
+      formData.append('_captcha', 'false'); // Disable captcha for better UX
 
-      const response = await fetch(
-        REGISTRATION_ENDPOINT,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(REGISTRATION_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+      });
 
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.message || 'Request failed');
+      // FormSubmit redirects to a success page on success
+      // Check if response is ok (200-299 status)
+      if (response.ok) {
+        setRegistrationSuccess(true);
+      } else {
+        throw new Error('Failed to submit registration');
       }
-
-      setRegistrationSuccess(true);
     } catch (error) {
       console.error('Registration error:', error);
       setRegistrationError('Unable to submit your registration. Please try again.');
