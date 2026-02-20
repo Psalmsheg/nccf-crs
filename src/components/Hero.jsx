@@ -64,7 +64,7 @@ const Hero = ({ onRegisterClick }) => {
           <div className="absolute -top-10 -right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-            <img alt="Conference Atmosphere" className="w-full aspect-[4/3] object-cover" data-alt="Group of people worshiping at a christian conference" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpQyhfN1SGy9C_rxdgF4f8VquFnayCJ693soIqvbmUJtW1Q8T6seUcYNp3BjymL8t4pCWFmNi6JnZCQTw0THhtg9leTo3Z49MqaeZseSiL5hxx3UO8Vz1VOu7Y1RrGE_SYrwYTLneR_PtDTxR8ivWe1ZWWRiV_NsqaT35F5BxeAnU2PGHS6dRbdc6SRZ1_JgHlc1ZKOBpjBZcK3H9vfSrf-BgxGQYkqNkrPbIryUmF12Y233bxlRkNJUtSpJDL609dhpS0mux_yBSD"/>
+            <img alt="Conference Atmosphere" className="w-full aspect-[4/3] object-cover" data-alt="Group of people worshiping at a christian conference" src="https://i.pinimg.com/736x/2d/56/a7/2d56a7317317bba56abc53e34ee99fd8.jpg"/>
           </div>
         </div>
       </div>

@@ -86,7 +86,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         onClick={handleOverlayClick}
       >
         <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] md:max-h-[80vh] shadow-2xl overflow-y-auto border border-primary/10 text-center px-6 py-8 flex flex-col items-center gap-6">
-          <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center shadow-inner shadow-emerald-200 mb-2">
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2">
             <span className="material-symbols-outlined text-6xl text-primary">check_circle</span>
           </div>
           <div className="space-y-2">
