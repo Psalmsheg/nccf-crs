@@ -477,15 +477,24 @@ function App() {
       'END:VCALENDAR',
     ];
 
-    const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'nccf-conference-2026.ics';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    const icsContent = lines.join('\r\n');
+    const dataUrl = `data:text/calendar;charset=utf-8,${encodeURIComponent(icsContent)}`;
+
+    // Try to open in calendar app
+    const newWindow = window.open(dataUrl, '_blank');
+
+    // Fallback: if popup blocked or calendar app doesn't open, download the file
+    if (!newWindow || newWindow.closed) {
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'nccf-conference-2026.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (
