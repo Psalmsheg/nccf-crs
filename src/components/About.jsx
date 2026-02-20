@@ -35,7 +35,7 @@ const About = () => {
       id="about"
     >
       <div className="max-w-4xl mx-auto text-center flex flex-col gap-8">
-        <h2 className="text-primary text-sm font-bold uppercase tracking-widest animate-fade-in">About the Conference</h2>
+        <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">About the Conference</h2>
         <h3 className="text-3xl lg:text-4xl font-extrabold text-[#111813] animate-fade-in animate-delay-100">A Divine Appointment for Rejuvenation</h3>
         <div className="h-1 w-24 bg-primary mx-auto rounded-full mt-2 animate-fade-in animate-delay-200"></div>
         <p className="text-lg text-[#111813]/70 leading-loose animate-fade-in animate-delay-300">

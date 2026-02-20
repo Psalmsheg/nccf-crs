@@ -36,7 +36,7 @@ const Schedule = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-primary text-sm font-bold uppercase tracking-widest animate-fade-in">Program of Events</h2>
+          <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">Program of Events</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Conference Schedule</h3>
           <div className="h-1.5 w-20 bg-gradient-to-r from-primary to-primary-dark mx-auto rounded-full mt-4 animate-fade-in animate-delay-200"></div>
         </div>

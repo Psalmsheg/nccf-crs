@@ -37,7 +37,7 @@ const Hero = ({ onRegisterClick }) => {
         <div className="flex flex-col gap-8">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full w-fit border border-primary/20 animate-fade-in-up">
             <span className="material-symbols-outlined text-sm">event</span>
-            <span className="text-xs font-bold uppercase tracking-widest">Annual State Conference 2026</span>
+            <span className="text-xs font-extrabold uppercase tracking-widest">Annual State Conference 2026</span>
           </div>
           <h1 className="text-[#111813] text-5xl lg:text-7xl font-black leading-[1.1] tracking-tight animate-fade-in-up animate-delay-100">NCCF Cross River State <span className="text-primary block underline decoration-primary/30">Conference 2026</span></h1>
           <div className="flex flex-col gap-4 animate-fade-in-up animate-delay-200">

@@ -36,7 +36,7 @@ const Location = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-primary text-sm font-bold uppercase tracking-widest animate-fade-in">Location</h2>
+          <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">Location</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Event Venue</h3>
           <p className="text-xl text-[#111813]/70 mt-4 animate-fade-in animate-delay-200">NCCF Family House, Calabar, Cross River State</p>
           <div className="h-1.5 w-20 bg-gradient-to-r from-primary to-primary-dark mx-auto rounded-full mt-4 animate-fade-in animate-delay-300"></div>

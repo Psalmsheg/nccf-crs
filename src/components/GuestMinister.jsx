@@ -36,7 +36,7 @@ const GuestMinister = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-primary text-sm font-bold uppercase tracking-widest animate-fade-in">Anointed Vessels</h2>
+          <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">Anointed Vessels</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Featured Speakers</h3>
           <p className="text-lg text-[#111813]/70 mt-4 max-w-2xl mx-auto animate-fade-in animate-delay-200">Prepare your hearts to receive from heaven through the ministry of our specially invited guest speakers. They carry a profound grace for teaching and the prophetic.</p>
         </div>
