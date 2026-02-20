@@ -42,12 +42,12 @@ const Support = () => {
             <p className="text-lg text-[#111813]/70 leading-relaxed">
               Your generous partnership enables us to provide logistics, welfare, and materials for hundreds of Corpers attending this life-transforming conference.
             </p>
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <a className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-lg shadow-primary/20 w-full sm:w-auto" href="#">
                 Give Now via Online
                 <span className="material-symbols-outlined">payments</span>
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="relative animate-slide-in-right">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-2xl blur opacity-30"></div>

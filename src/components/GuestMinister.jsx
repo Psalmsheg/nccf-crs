@@ -55,7 +55,7 @@ const GuestMinister = () => {
           {/* Speaker 2 */}
           <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all animate-fade-in-up animate-delay-500">
             <div className="aspect-[4/5] overflow-hidden">
-              <img alt="Speaker 2" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional portrait of a male speaker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHX1X_S2uW1tB7L9V3n9PqfL6p4wHnF7r6U1m4b8J9K0L1M2N3O4P5Q6R7S8T9U0V1W2X3Y4Z5"/>
+              <img alt="Speaker 2" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional portrait of a Female speaker" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
             </div>
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Pastor Sarah Williams</h4>
@@ -66,7 +66,7 @@ const GuestMinister = () => {
           {/* Speaker 3 */}
           <div className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all animate-fade-in-up animate-delay-500">
             <div className="aspect-[4/5] overflow-hidden">
-              <img alt="Speaker 3" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional portrait of a female speaker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHX1X_S2uW1tB7L9V3n9PqfL6p4wHnF7r6U1m4b8J9K0L1M2N3O4P5Q6R7S8T9U0V1W2X3Y4Z6"/>
+              <img alt="Speaker 3" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional portrait of a Male speaker" src="https://images.unsplash.com/photo-1623184663796-f0eb7e46d6ab?q=80&w=1112&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
             </div>
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Bro. Emmanuel Okon</h4>
