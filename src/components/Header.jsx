@@ -50,12 +50,12 @@ const Header = ({ onRegisterClick }) => {
           <a className="text-sm font-semibold hover:text-primary transition-colors" href="#minister">Guest Ministers</a>
           <button
             type="button"
-            className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all transform hover:scale-105 shadow-lg shadow-primary/20 hover:shadow-primary/40 bg-gradient-to-br from-primary to-primary-dark cursor-pointer"
+            className="bg-[#feab00] hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all transform hover:scale-105 shadow-lg shadow-primary/20 hover:shadow-primary/40 bg-gradient-to-br from-primary to-primary-dark cursor-pointer"
             onClick={onRegisterClick}
           >
             Register Now
           </button>
-          <a className="text-sm font-semibold hover:text-primary transition-colors" href="#schedule">Conference Schedule</a>
+          <a className="text-sm font-semibold hover:text-[#feab00] transition-colors" href="#schedule">Conference Schedule</a>
         </nav>
         <button 
           className="md:hidden text-primary hover:text-primary/80 transition-colors"

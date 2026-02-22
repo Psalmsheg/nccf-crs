@@ -37,7 +37,7 @@ const Support = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col gap-6 animate-slide-in-left">
-            <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest">Support the Mission</h2>
+            <h2 className="text-[#feab00] text-sm font-extrabold uppercase tracking-widest">Support the Mission</h2>
             <h3 className="text-4xl font-extrabold text-[#111813]">Partner with us for a greater impact</h3>
             <p className="text-lg text-[#111813]/70 leading-relaxed">
               Your generous partnership enables us to provide logistics, welfare, and materials for hundreds of Corpers attending this life-transforming conference.
@@ -58,23 +58,23 @@ const Support = () => {
                     <span className="material-symbols-outlined text-3xl">account_balance</span>
                   </div>
                   <div>
-                    <p className="text-xs font-extrabold text-primary uppercase tracking-widest mb-1">Account Details</p>
+                    <p className="text-xs font-extrabold text-[#feab00] uppercase tracking-widest mb-1">Account Details</p>
                     <h4 className="text-xl font-bold text-[#111813]">Bank Transfer</h4>
                   </div>
                 </div>
                 <div className="space-y-6">
                   <div>
                     <p className="text-sm text-[#111813]/50 font-medium mb-1 uppercase tracking-wider">Account Name</p>
-                    <p className="text-xl font-extrabold text-[#111813]">Nigeria Christian Corpers Fellowship (NCCF)</p>
+                    <p className="text-xl font-extrabold text-[#feab00]">Nigeria Christian Corpers' Fellowship (NCCF)</p>
                   </div>
                   <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
                     <div>
                       <p className="text-sm text-[#111813]/50 font-medium mb-1 uppercase tracking-wider">Account Number</p>
-                      <p className="text-3xl font-extrabold text-primary tracking-tighter">2311058742</p>
+                      <p className="text-3xl font-extrabold text-[#feab00] tracking-tighter">2313070548</p>
                     </div>
                     <div>
                       <p className="text-sm text-[#111813]/50 font-medium mb-1 uppercase tracking-wider text-md-right">Bank Name</p>
-                      <p className="text-lg font-bold text-[#111813] text-md-right">ECOBANK</p>
+                      <p className="text-lg font-bold text-[#feab00] text-md-right">ECOBANK</p>
                     </div>
                   </div>
                 </div>

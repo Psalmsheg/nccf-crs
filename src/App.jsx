@@ -9,9 +9,11 @@ import CallToAction from './components/CallToAction';
 import Location from './components/Location';
 import Support from './components/Support';
 import Footer from './components/Footer';
+import PaymentModal from './components/PaymentModal';
 
 const REGISTRATION_ENDPOINT = 'https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY = 'd31be791-9551-4e0d-835d-38e503848636';
+const PAYSTACK_PUBLIC_KEY = 'pk_test_9f1ffc88bbd96453a60545989cee3ce0d33066d1';
 
 function formatDateTimeForICS(date) {
   const pad = (value) => String(value).padStart(2, '0');
@@ -25,12 +27,89 @@ function formatDateTimeForICS(date) {
   return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
 }
 
-function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError, isSuccess, onAddToCalendar, onResetSuccess }) {
+function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError, isSuccess, onAddToCalendar, onResetSuccess, allocations }) {
   const [fullName, setFullName] = useState('');
   const [zone, setZone] = useState('');
   const [batch, setBatch] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [serviceUnit, setServiceUnit] = useState('');;
+
+  // Accommodation and Bible Study allocation logic
+  const femaleRooms = ['Flourish Room', 'Love Room', 'Esther Room', 'Ruth Room', 'Deborah Room', 'Mary Room', 'Martha Room', 'Hannah Room', 'Abigail Room', 'Sarah Room'];
+  const maleRooms = ['Kadosh Room', 'Faith Room', 'Grace Room', 'Victory Room', 'Gentleness Room', 'Joseph Room', 'David Room', 'Elijah Room', 'Paul Room', 'Peter Room'];
+  const serviceUnits = [
+    'Prayer Unit',
+    'Protocol Unit',
+    'Ushering Unit',
+    'Choir Unit',
+    'Publicity Unit',
+    'Registration Unit',
+    'Welfare Unit',
+    'Bible Study Unit',
+    'Transport and Organizing Unit'
+  ];
+
+  const getRandomAccommodation = (gender) => {
+    const rooms = gender === 'Female' ? femaleRooms : maleRooms;
+    const randomIndex = Math.floor(Math.random() * rooms.length);
+    return rooms[randomIndex];
+  };
+
+  const getBibleStudyClass = () => {
+    const counterKey = 'registrationCounter';
+    const timestampKey = 'lastAllocationTime';
+    const maxRetries = 3;
+
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      const now = Date.now();
+      const lastAllocation = parseInt(localStorage.getItem(timestampKey) || '0');
+
+      // If last allocation was very recent (< 200ms), wait and retry
+      if (now - lastAllocation < 200) {
+        // Simple busy wait for other operations to complete
+        const waitTime = 200 - (now - lastAllocation);
+        const startWait = Date.now();
+        while (Date.now() - startWait < waitTime) {
+          // Busy wait
+        }
+        continue;
+      }
+
+      // Update timestamp to mark this allocation as in progress
+      localStorage.setItem(timestampKey, now.toString());
+
+      try {
+        // Get and increment counter
+        const currentCount = parseInt(localStorage.getItem(counterKey) || '0');
+        const classNumber = (currentCount % 10) + 1;
+
+        // Store the incremented counter
+        localStorage.setItem(counterKey, (currentCount + 1).toString());
+
+        return classNumber;
+
+      } catch (error) {
+        // Reset timestamp on error
+        localStorage.removeItem(timestampKey);
+        throw error;
+      }
+    }
+
+    // Fallback: use timestamp-based allocation if retries exhausted
+    const timestamp = Date.now();
+    const fallbackClass = ((timestamp % 1000) % 10) + 1;
+    console.warn('Using timestamp-based fallback allocation');
+    return fallbackClass;
+  };
+
+  const allocateResources = (gender) => {
+    const accommodation = getRandomAccommodation(gender);
+    const bibleStudyClass = getBibleStudyClass();
+
+    return { accommodation, bibleStudyClass };
+  };
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -59,9 +138,12 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!fullName.trim() || !zone.trim() || !email.trim() || !batch || !phoneNumber.trim()) {
+    if (!fullName.trim() || !zone.trim() || !email.trim() || !batch || !phoneNumber.trim() || !gender) {
       return;
     }
+
+    // Allocate accommodation and bible study class
+    const allocations = allocateResources(gender);
 
     await onSubmit(
       {
@@ -70,6 +152,10 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         batch,
         email: email.trim(),
         phoneNumber: phoneNumber.trim(),
+        gender,
+        serviceUnit: serviceUnit || null, // Optional field
+        accommodation: allocations.accommodation,
+        bibleStudyClass: allocations.bibleStudyClass,
       }
     );
 
@@ -77,16 +163,19 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
     setZone('');
     setBatch('Batch A1');
     setEmail('');
+    setPhoneNumber('');
+    setGender('');
+    setServiceUnit('');
   };
 
   if (isSuccess) {
     return (
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-4"
         onClick={handleOverlayClick}
       >
-        <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] md:max-h-[80vh] shadow-2xl overflow-y-auto border border-primary/10 text-center px-6 py-8 flex flex-col items-center gap-6">
-          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2">
+        <div className="bg-white rounded-2xl max-w-xl w-full shadow-2xl border border-primary/10 text-center px-6 py-8 flex flex-col items-center gap-6">
+          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2 flex-shrink-0">
             <span className="material-symbols-outlined text-6xl text-primary">check_circle</span>
           </div>
           <div className="space-y-2">
@@ -98,6 +187,42 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               receive your confirmation details via email.
             </p>
           </div>
+
+          {/* Allocation Information */}
+          {allocations && (
+            <div className="w-full bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">celebration</span>
+                Your Allocations
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="material-symbols-outlined text-primary text-2xl">hotel</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Accommodation</span>
+                  </div>
+                  <p className="text-xl font-bold text-primary">{allocations.accommodation}</p>
+                </div>
+                <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="material-symbols-outlined text-primary text-2xl">school</span>
+                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Bible Study</span>
+                  </div>
+                  <p className="text-xl font-bold text-primary">Bible Study Class {allocations.bibleStudyClass}</p>
+                </div>
+                {allocations.serviceUnit && (
+                  <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10 md:col-span-2">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="material-symbols-outlined text-primary text-2xl">volunteer_activism</span>
+                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Service Unit</span>
+                    </div>
+                    <p className="text-xl font-bold text-primary">{allocations.serviceUnit}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           <div className="w-full flex flex-col gap-3 mt-2">
             <button
               type="button"
@@ -243,6 +368,60 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             </div>
           </div>
 
+          {/* Gender Selection */}
+          <div className="space-y-1.5">
+            <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="gender">Gender</label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">person</span>
+              <select
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                id="gender"
+                value={gender}
+                onChange={(event) => setGender(event.target.value)}
+                required
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
+              >
+                <option value="" disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Service Unit Selection (Optional) */}
+          <div className="space-y-1.5">
+            <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="serviceUnit">
+              Which Department Would You Like to Serve? <span className="text-gray-500 font-normal"></span>
+            </label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">volunteer_activism</span>
+              <select
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                id="serviceUnit"
+                value={serviceUnit}
+                onChange={(event) => setServiceUnit(event.target.value)}
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                  backgroundPosition: 'right 0.5rem center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '1.5em 1.5em',
+                  paddingRight: '2.5rem'
+                }}
+              >
+                <option value="">Select a department</option>
+                {serviceUnits.map((unit) => (
+                  <option key={unit} value={unit}>{unit}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           {/* Two Column Layout for Zone and Batch */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Zone Selection */}
@@ -351,6 +530,12 @@ function App() {
   const [isSubmittingRegistration, setIsSubmittingRegistration] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [userAllocations, setUserAllocations] = useState(null);
+  
+  // Payment related state
+  const [showPayment, setShowPayment] = useState(false);
+  const [paymentData, setPaymentData] = useState(null);
+  const [conferenceFee] = useState(2500); // ₦1,500 conference fee
 
   useEffect(() => {
     const smoothScrollTo = (targetY, duration) => {
@@ -403,14 +588,25 @@ function App() {
   const [registrationKey, setRegistrationKey] = useState(0);
 
   const handleOpenRegistration = () => {
+    setShowPayment(true); // Show payment modal first
+  };
+
+  const handlePaymentSuccess = (paymentInfo) => {
+    setPaymentData(paymentInfo);
+    setShowPayment(false);
     setShowRegistration(true);
     setRegistrationKey(prev => prev + 1); // Force remount to reset form state
+  };
+
+  const handleClosePayment = () => {
+    setShowPayment(false);
   };
 
   const handleCloseRegistration = () => {
     setShowRegistration(false);
     setRegistrationError('');
     setRegistrationSuccess(false);
+    setUserAllocations(null);
   };
 
   const handleSubmitRegistration = async (data) => {
@@ -422,8 +618,11 @@ function App() {
         access_key: WEB3FORMS_ACCESS_KEY,
         subject: 'New NCCF CRS Conference Registration',
         from_name: 'NCCF CRS Conference Website',
-        // Add timestamp to make each submission unique
-        timestamp: new Date().toISOString(),
+        // Payment information
+        payment_reference: paymentData?.reference || 'N/A',
+        payment_amount: paymentData?.amount || 0,
+        payment_status: paymentData?.status || 'N/A',
+        // timestamp: new Date().toISOString(),
         ...data,
       };
 
@@ -445,6 +644,13 @@ function App() {
         throw new Error(result.message || 'Request failed');
       }
 
+      // Store allocations for display in success modal
+      setUserAllocations({
+        accommodation: data.accommodation,
+        bibleStudyClass: data.bibleStudyClass,
+        serviceUnit: data.serviceUnit,
+      });
+
       setRegistrationSuccess(true);
     } catch (error) {
       console.error('Registration error:', error);
@@ -461,6 +667,16 @@ function App() {
     const dtStart = '20261105T180000';
     const dtEnd = '20261107T160000';
 
+    // Build detailed description with allocations
+    let description = 'Annual state conference themed "Renewed Strength" (Isaiah 40:31).\\n\\n';
+    description += 'Your Allocations:\\n';
+    description += `• Accommodation: ${userAllocations.accommodation}\\n`;
+    description += `• Bible Study Class: ${userAllocations.bibleStudyClass}\\n`;
+    if (userAllocations.serviceUnit) {
+      description += `• Service Unit: ${userAllocations.serviceUnit}\\n`;
+    }
+    description += '\\nPlease arrive on time and bring your conference materials.';
+
     const lines = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -471,7 +687,7 @@ function App() {
       `DTSTART:${dtStart}`,
       `DTEND:${dtEnd}`,
       'SUMMARY:NCCF Cross River State Conference 2026',
-      'DESCRIPTION:Annual state conference themed "Renewed Strength" (Isaiah 40:31).',
+      `DESCRIPTION:${description}`,
       'LOCATION:NCCF Family House, Calabar, Cross River State',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -511,6 +727,14 @@ function App() {
         <Support />
       </main>
       <Footer onRegisterClick={handleOpenRegistration} />
+      <PaymentModal
+        open={showPayment}
+        onClose={handleClosePayment}
+        onPaymentSuccess={handlePaymentSuccess}
+        amount={conferenceFee}
+        publicKey={PAYSTACK_PUBLIC_KEY}
+      />
+      
       <RegistrationModal
         key={registrationKey}
         open={showRegistration}
@@ -524,7 +748,9 @@ function App() {
           setRegistrationSuccess(false);
           setShowRegistration(false);
           setRegistrationError('');
+          setUserAllocations(null);
         }}
+        allocations={userAllocations}
       />
     </>
   );

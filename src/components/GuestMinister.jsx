@@ -36,7 +36,7 @@ const GuestMinister = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">Anointed Vessels</h2>
+          <h2 className="text-[#feab00] text-sm font-extrabold uppercase tracking-widest animate-fade-in">Anointed Vessels</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Featured Speakers</h3>
           <p className="text-lg text-[#111813]/70 mt-4 max-w-2xl mx-auto animate-fade-in animate-delay-200">Prepare your hearts to receive from heaven through the ministry of our specially invited guest speakers. They carry a profound grace for teaching and the prophetic.</p>
         </div>
@@ -48,7 +48,7 @@ const GuestMinister = () => {
             </div>
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Apostle Michael Thompson</h4>
-              <p className="text-primary text-sm font-bold uppercase mb-4">Keynote Speaker</p>
+              <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Keynote Speaker</p>
               <p className="text-[#111813]/60 text-sm">A prophetic voice to this generation with a mandate to raise disciples for Christ.</p>
             </div>
           </div>
@@ -59,7 +59,7 @@ const GuestMinister = () => {
             </div>
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Pastor Sarah Williams</h4>
-              <p className="text-primary text-sm font-bold uppercase mb-4">Workshop Lead</p>
+              <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Workshop Lead</p>
               <p className="text-[#111813]/60 text-sm">Dedicated to helping youth discover their divine purpose and excel in their careers.</p>
             </div>
           </div>
@@ -70,7 +70,7 @@ const GuestMinister = () => {
             </div>
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Bro. Emmanuel Okon</h4>
-              <p className="text-primary text-sm font-bold uppercase mb-4">Guest Psalmist</p>
+              <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Guest Psalmist</p>
               <p className="text-[#111813]/60 text-sm">A worship leader with a unique grace for leading congregations into the presence of God.</p>
             </div>
           </div>

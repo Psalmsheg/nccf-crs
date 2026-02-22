@@ -3,6 +3,9 @@
 @theme {
   --color-primary: #391e76;
   --color-primary-dark: #2e185e;
+  --color-accent: #feab00;
+  --color-accent-light: #fec84d;
+  --color-accent-dark: #e69300;
   --color-background-light: #f8f6fc;
   --color-background-dark: #1a0b2e;
   --font-family-display: "Manrope", "sans-serif";
@@ -24,6 +27,35 @@ body {
 .glass-effect {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
+}
+
+/* Blended color gradients */
+.gradient-primary-accent {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.gradient-accent-primary {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+}
+
+.gradient-primary-accent-subtle {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 30%);
+}
+
+.accent-border {
+  border-color: var(--color-accent);
+}
+
+.accent-text {
+  color: var(--color-accent);
+}
+
+.accent-bg-subtle {
+  background-color: rgba(254, 171, 0, 0.1);
+}
+
+.accent-shadow {
+  box-shadow: 0 4px 20px rgba(254, 171, 0, 0.2);
 }
 
 /* Animation utilities */

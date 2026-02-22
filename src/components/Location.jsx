@@ -36,10 +36,10 @@ const Location = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-primary text-sm font-extrabold uppercase tracking-widest animate-fade-in">Location</h2>
+          <h2 className="text-[#feab00] text-sm font-extrabold uppercase tracking-widest animate-fade-in">Location</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Event Venue</h3>
           <p className="text-xl text-[#111813]/70 mt-4 animate-fade-in animate-delay-200">NCCF Family House, Calabar, Cross River State</p>
-          <div className="h-1.5 w-20 bg-gradient-to-r from-primary to-primary-dark mx-auto rounded-full mt-4 animate-fade-in animate-delay-300"></div>
+          <div className="h-1.5 w-20 bg-[#feab00] mx-auto rounded-full mt-4 animate-fade-in animate-delay-300"></div>
         </div>
         <div className="relative group animate-slide-in-left animate-delay-500">
           <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
@@ -57,8 +57,8 @@ const Location = () => {
           </div>
         </div>
         <div className="mt-12 text-center">
-          <a className="inline-flex items-center gap-2 text-primary font-bold hover:underline" href="https://www.google.com/maps/place/NCCF+Family+House+Calabar/@5.0109663,8.3397932,17z" target="_blank">
-            <span className="material-symbols-outlined">map</span>
+          <a className="inline-flex items-center gap-2 text-[#feab00] font-bold hover:underline" href="https://www.google.com/maps/place/NCCF+Family+House+Calabar/@5.0109663,8.3397932,17z" target="_blank">
+            <span className="material-symbols-outlined ">map</span>
             View on Google Maps
           </a>
         </div>
