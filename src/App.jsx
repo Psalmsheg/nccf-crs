@@ -668,7 +668,7 @@ function App() {
     const dtEnd = '20261107T160000';
 
     // Build detailed description with allocations
-    let description = 'Annual state conference themed "Renewed Strength" (Isaiah 40:31).\\n\\n';
+    let description = 'Annual state conference themed Missio Dei; ADVANCING THE MISSION OF GOD ON EARTH" (2Cor., 5:20, Matt. 28:19, John 20:21).\\n\\n';
     description += 'Your Allocations:\\n';
     description += `• Accommodation: ${userAllocations.accommodation}\\n`;
     description += `• Bible Study Class: ${userAllocations.bibleStudyClass}\\n`;
