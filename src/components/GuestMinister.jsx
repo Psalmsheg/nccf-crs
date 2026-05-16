@@ -54,7 +54,7 @@ const GuestMinister = () => {
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Reverend Samuel Bassey</h4>
               <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Keynote Speaker</p>
-              <p className="text-[#111813]/60 text-sm">A prophetic voice to this generation with a mandate to raise disciples for Christ.</p>
+              <p className="text-[#111813]/60 text-sm">He is traveling missionary and Gospel teacher focused on Discipleship making, prophetic ministry, and spiritual development. He is the Senior Pastor Harvest Across Nations Int'l, a non-denominational and cross-cultural missionary church committed to raising at least one Kingdom disciple in every family of the earth.</p>
             </div>
           </div>
 
@@ -66,7 +66,7 @@ const GuestMinister = () => {
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Reverend Victor Anaele</h4>
               <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Keynote Speaker</p>
-              <p className="text-[#111813]/60 text-sm">Reverend Victor Anaele is a passionate disciple of Jesus, Agropreneur and Web designer. He is a teacher of God's word, preacher of the Gospel and the Setman of the Remnant Christian Centre, Uyo, Awka Ibom State</p>
+              <p className="text-[#111813]/60 text-sm">Reverend Victor Anaele is a passionate disciple of Jesus, Agropreneur and Web designer. He is a teacher of God's word, preacher of the Gospel and the Pointman of the Remnant Christian Network, Uyo, Awka Ibom State</p>
             </div>
           </div>
 
@@ -78,7 +78,7 @@ const GuestMinister = () => {
             <div className="p-8 text-center">
               <h4 className="text-xl font-bold mb-1">Pastor Victor Enwereuzor</h4>
               <p className="text-[#feab00] text-sm font-bold uppercase mb-4">Keynote Speaker</p>
-              <p className="text-[#111813]/60 text-sm">A prophetic voice to this generation with a mandate to raise disciples for Christ.</p>
+              <p className="text-[#111813]/60 text-sm">He is the Pastor Intimate Vessels Church, Lagos. He is committed to raising and building a people of genuine intimacy with God, equipping them to live victoriously through sound teaching of God's Word. He is a husband and father, a software developer, and a marketplace Apostle.</p>
             </div>
           </div>
         </div>

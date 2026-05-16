@@ -113,7 +113,7 @@ const Schedule = () => {
         {
           title: 'Saturday Afternoon Session',
           items: [
-            { time: '2:00PM – 5:00PM', program: 'Alumni Reunion', minister: 'Pastor Joshua' },
+            { time: '2:00PM – 5:00PM', program: 'Alumni Reunion', minister: 'Pastor Joshua Olalekan' },
             { time: '5:00PM – 5:20PM', program: 'Praise and Worship', minister: 'Fountain Choir' },
             { time: '5:20PM – 6:20PM', program: 'Health Matters', minister: 'Pastor Adesanya Emmanuel' },
             {
