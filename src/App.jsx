@@ -217,30 +217,30 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           {/* Allocation Information */}
           {allocations && (
             <div className="w-full bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-primary">celebration</span>
                 Your Allocations
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10">
+                <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="material-symbols-outlined text-primary text-2xl">hotel</span>
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Accommodation</span>
+                    <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Accommodation</span>
                   </div>
                   <p className="text-xl font-bold text-primary">{allocations.accommodation}</p>
                 </div>
-                <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10">
+                <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="material-symbols-outlined text-primary text-2xl">school</span>
-                    <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Bible Study</span>
+                    <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Bible Study</span>
                   </div>
                   <p className="text-xl font-bold text-primary">Bible Study Class {allocations.bibleStudyClass}</p>
                 </div>
                 {allocations.serviceUnit && (
-                  <div className="bg-white/80 dark:bg-gray-800/50 rounded-lg p-4 border border-primary/10 md:col-span-2">
+                  <div className="bg-white/80 rounded-lg p-4 border border-primary/10 md:col-span-2">
                     <div className="flex items-center gap-3 mb-2">
                       <span className="material-symbols-outlined text-primary text-2xl">volunteer_activism</span>
-                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Service Unit</span>
+                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Service Unit</span>
                     </div>
                     <p className="text-xl font-bold text-primary">{allocations.serviceUnit}</p>
                   </div>
@@ -276,7 +276,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-xl max-w-lg w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
+      <div className="bg-white rounded-xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
         {/* Modal Header */}
         <div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-primary/10 flex-shrink-0">
           <div className="flex justify-between items-start mb-4">
@@ -312,23 +312,23 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           {/* Bank Transfer Instructions */}
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-4 border border-gray-100 dark:border-gray-600 mb-2 mt-2">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-gray-500 dark:text-gray-400 text-xs font-medium">Conference Fee</span>
-              <span className="font-bold text-primary text-lg">₦2,500</span>
+              <span className="text-gray-500 text-sm font-semibold">Conference Fee</span>
+              <span className="font-bold text-primary text-xl">₦2,500</span>
             </div>
             
             <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-600">
               <div className="flex justify-between items-center">
-                <span className="block text-xs text-gray-500 dark:text-gray-400">Bank Name</span>
-                <span className="font-semibold text-gray-900 dark:text-white text-sm">{BANK_DETAILS.bankName}</span>
+                <span className="block text-sm font-semibold text-gray-500">Bank Name</span>
+                <span className="font-bold text-gray-900 text-md">{BANK_DETAILS.bankName}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="block text-xs text-gray-500 dark:text-gray-400">Account Number</span>
+                <span className="block text-sm font-semibold text-gray-500">Account Number</span>
                 <div className="flex items-center gap-1">
-                  <span className="font-bold text-sm text-gray-900 dark:text-white tracking-wider">{BANK_DETAILS.accountNumber}</span>
+                  <span className="font-bold text-md text-gray-900 tracking-wider">{BANK_DETAILS.accountNumber}</span>
                   <button 
                     type="button"
                     onClick={handleCopy}
-                    className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors text-primary"
+                    className="p-1 hover:bg-gray-200 rounded-md transition-colors text-primary cursor-pointer"
                   >
                     <span className="material-symbols-outlined text-[14px]">
                       {copied ? 'check' : 'content_copy'}
@@ -337,8 +337,8 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="block text-xs text-gray-500 dark:text-gray-400">Account Name</span>
-                <span className="font-semibold text-gray-900 dark:text-white text-sm">{BANK_DETAILS.accountName}</span>
+                <span className="block text-sm font-semibold text-gray-500">Account Name</span>
+                <span className="font-bold text-sm md:text-md text-gray-900">{BANK_DETAILS.accountName}</span>
               </div>
             </div>
           </div>
@@ -354,11 +354,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
 
           {/* Full Name */}
           <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-0.5" htmlFor="full-name">Full Name</label>
+            <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="full-name">Full Name</label>
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">person</span>
               <input
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
                 id="full-name"
                 placeholder="e.g., John Doe"
                 type="text"
@@ -380,11 +380,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
 
           {/* Email Address */}
           <div className="space-y-1.5">
-            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-0.5" htmlFor="email">Email Address</label>
+            <label className="text-sm font-semibold text-gray-700 ml-0.5" htmlFor="email">Email Address</label>
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">mail</span>
               <input
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-background-dark/50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
                 id="email"
                 placeholder="e.g., john.doe@example.com"
                 type="email"
@@ -409,7 +409,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">phone</span>
               <input
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
                 id="phone"
                 placeholder="e.g., +234xxxxxxxxx"
                 type="tel"
@@ -435,7 +435,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">person</span>
               <select
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
                 id="gender"
                 value={gender}
                 onChange={(event) => setGender(event.target.value)}
@@ -463,7 +463,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">volunteer_activism</span>
               <select
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer"
                 id="serviceUnit"
                 value={serviceUnit}
                 onChange={(event) => setServiceUnit(event.target.value)}
@@ -491,7 +491,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">location_on</span>
                 <select
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer"
                   id="zone"
                   value={zone}
                   onChange={(event) => setZone(event.target.value)}
@@ -527,7 +527,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">groups</span>
                 <select
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer"
                   id="batch"
                   value={batch}
                   onChange={(event) => setBatch(event.target.value)}
@@ -560,7 +560,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
                 receiptFile 
                   ? 'border-primary bg-primary/5 dark:bg-primary/10' 
-                  : 'border-gray-300 dark:border-gray-600 hover:border-primary hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                  : 'border-gray-300 hover:border-primary hover:bg-gray-50'
               }`}
             >
               <input 
@@ -585,7 +585,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               ) : (
                 <div className="flex flex-col items-center gap-1">
                   <span className="material-symbols-outlined text-gray-400 text-3xl mb-1">cloud_upload</span>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Click to upload receipt</span>
+                  <span className="text-sm text-gray-600">Click to upload receipt</span>
                   <span className="text-xs text-gray-500">Max 5MB (Images or PDF)</span>
                 </div>
               )}
@@ -607,7 +607,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <button
             type="button"
             onClick={onClose}
-            className="order-2 sm:order-1 flex-1 px-6 py-3 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+            className="order-2 sm:order-1 flex-1 px-6 py-3 text-sm font-bold text-gray-600 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer"
           >
             Cancel
           </button>
