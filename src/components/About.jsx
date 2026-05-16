@@ -41,6 +41,35 @@ const About = () => {
         <p className="text-lg text-[#111813]/70 leading-loose animate-fade-in animate-delay-300">
           The Nigerian Christian Corpers' Fellowship (NCCF) Cross River State Conference is more than just a gathering; it is a sacred space designed for spiritual alignment and empowerment. For decades, NCCF has stood as a beacon of faith for corps members across Nigeria, and this year's conference in the heart of Cross River aims to reignite the fire of service, fellowship, and purpose in every attendee. We invite you to experience a shift in your spiritual journey.
         </p>
+        <div className="bg-background-light border border-primary/10 rounded-2xl p-6 lg:p-8 text-left animate-fade-in animate-delay-400">
+          <h4 className="text-lg font-extrabold text-[#111813] tracking-tight">About NCCF</h4>
+          <p className="mt-3 text-sm lg:text-base text-[#111813]/70 leading-relaxed">
+            In the late 1950s, a Scottish missionary, Pa S. G. Elton, prophesied that a time would come when Nigeria would raise and send her youths to preach the Gospel across the nation. In the aftermath of the Nigerian Civil War (1967–1970), the Federal Government established the National Youth Service Corps (NYSC) in 1973 to foster unity and national integration. Within this setting, NCCF (Nigeria Christian Corpers’ Fellowship) emerged as a non-denominational, non-governmental, non-profit Christian body for corps members—known as Jesus Corpers.
+          </p>
+          <p className="mt-4 text-sm lg:text-base text-[#111813]/70 leading-relaxed">
+            Our vision is to ensure that corps members encounter Christ and are equipped to preach the Gospel and disciple men everywhere in Nigeria. NCCF expresses this in three dimensions:
+          </p>
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white rounded-xl border border-primary/10 p-4">
+              <p className="text-sm font-extrabold text-primary">Organization</p>
+              <p className="mt-1 text-sm text-[#111813]/70 leading-relaxed">
+                A registered body that supports structure, accountability, and service.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl border border-primary/10 p-4">
+              <p className="text-sm font-extrabold text-primary">Fellowship</p>
+              <p className="mt-1 text-sm text-[#111813]/70 leading-relaxed">
+                A Spirit-filled home for worship, discipleship, and growth.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl border border-primary/10 p-4">
+              <p className="text-sm font-extrabold text-primary">Family</p>
+              <p className="mt-1 text-sm text-[#111813]/70 leading-relaxed">
+                A community of oneness—often expressed through Family Houses as a home away from home.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

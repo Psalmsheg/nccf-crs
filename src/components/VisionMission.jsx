@@ -42,7 +42,7 @@ const VisionMission = () => {
           </div>
           <h4 className="text-2xl font-bold mb-4">Our Vision</h4>
           <p className="text-[#111813]/70 leading-relaxed text-lg">
-            To see a generation of Christian youth across Cross River State and Nigeria at large, fully equipped and burning with zeal for Christ, making a significant impact in their host communities through service and evangelism.
+            To ensure that all Corp members encounter Jesus Christ and are effectively equipped to preach the Gospel and Disciple men everywhere in Nigeria.
           </p>
         </div>
         {/* Mission Card */}
@@ -52,7 +52,7 @@ const VisionMission = () => {
           </div>
           <h4 className="text-2xl font-bold mb-4">Our Mission</h4>
           <p className="text-[#111813]/70 leading-relaxed text-lg">
-            To mobilize corps members for effective rural rugged evangelism, to provide a platform for spiritual growth during the service year, and to foster a unity of faith that transcends ethnic and denominational boundaries.
+            The Mission of the Nigeria Christian Corpers' Fellowship (NCCF) centers on "Rural Rugged Evangelism"
           </p>
         </div>
       </div>

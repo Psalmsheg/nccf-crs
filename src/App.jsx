@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,11 +9,10 @@ import CallToAction from './components/CallToAction';
 import Location from './components/Location';
 import Support from './components/Support';
 import Footer from './components/Footer';
-import PaymentModal from './components/PaymentModal';
 
 const REGISTRATION_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = 'd31be791-9551-4e0d-835d-38e503848636';
-const PAYSTACK_PUBLIC_KEY = 'pk_test_9f1ffc88bbd96453a60545989cee3ce0d33066d1';
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'd31be791-9551-4e0d-835d-38e503848636';
+const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
 function formatDateTimeForICS(date) {
   const pad = (value) => String(value).padStart(2, '0');
@@ -34,7 +33,34 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('');
-  const [serviceUnit, setServiceUnit] = useState('');;
+  const [serviceUnit, setServiceUnit] = useState('');
+  const [receiptFile, setReceiptFile] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const fileInputRef = useRef(null);
+  
+  const BANK_DETAILS = {
+    bankName: "ECOBANK",
+    accountNumber: "2313070548",
+    accountName: "Nigeria Christian Corpers' Fellowship (NCCF)"
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(BANK_DETAILS.accountNumber);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        alert('File size must be less than 5MB');
+        setReceiptFile(null);
+      } else {
+        setReceiptFile(file);
+      }
+    }
+  };
 
   // Accommodation and Bible Study allocation logic
   const femaleRooms = ['Flourish Room', 'Love Room', 'Esther Room', 'Ruth Room', 'Deborah Room', 'Mary Room', 'Martha Room', 'Hannah Room', 'Abigail Room', 'Sarah Room'];
@@ -142,6 +168,11 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
       return;
     }
 
+    if (!receiptFile) {
+      alert("Please upload your payment receipt");
+      return;
+    }
+
     // Allocate accommodation and bible study class
     const allocations = allocateResources(gender);
 
@@ -153,19 +184,14 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         email: email.trim(),
         phoneNumber: phoneNumber.trim(),
         gender,
-        serviceUnit: serviceUnit || null, // Optional field
+        serviceUnit: serviceUnit || null,
         accommodation: allocations.accommodation,
         bibleStudyClass: allocations.bibleStudyClass,
-      }
+      },
+      receiptFile
     );
-
-    setFullName('');
-    setZone('');
-    setBatch('Batch A1');
-    setEmail('');
-    setPhoneNumber('');
-    setGender('');
-    setServiceUnit('');
+    
+    // Form fields will be reset when modal is closed
   };
 
   if (isSuccess) {
@@ -227,7 +253,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <button
               type="button"
               onClick={onResetSuccess}
-              className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-full w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-xl w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
             >
               Continue to portal
             </button>
@@ -250,7 +276,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white rounded-xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
+      <div className="bg-white rounded-xl max-w-lg w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
         {/* Modal Header */}
         <div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-primary/10 flex-shrink-0">
           <div className="flex justify-between items-start mb-4">
@@ -271,7 +297,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             </button>
           </div>
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight text-center">
-            Register for State Conference 2026
+            Register for CRS Conference 2026
           </h2>
           <p className="mt-2 text-gray-500 dark:text-gray-400 text-sm">
             Fill in your details below to secure your spot for this year's state conference.
@@ -282,6 +308,41 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         <div className="flex-1 overflow-y-auto">
           {/* Registration Form */}
           <form className="px-6 pb-4 space-y-4" onSubmit={handleSubmit}>
+          
+          {/* Bank Transfer Instructions */}
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-4 border border-gray-100 dark:border-gray-600 mb-2 mt-2">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-gray-500 dark:text-gray-400 text-xs font-medium">Conference Fee</span>
+              <span className="font-bold text-primary text-lg">₦2,500</span>
+            </div>
+            
+            <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-600">
+              <div className="flex justify-between items-center">
+                <span className="block text-xs text-gray-500 dark:text-gray-400">Bank Name</span>
+                <span className="font-semibold text-gray-900 dark:text-white text-sm">{BANK_DETAILS.bankName}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="block text-xs text-gray-500 dark:text-gray-400">Account Number</span>
+                <div className="flex items-center gap-1">
+                  <span className="font-bold text-sm text-gray-900 dark:text-white tracking-wider">{BANK_DETAILS.accountNumber}</span>
+                  <button 
+                    type="button"
+                    onClick={handleCopy}
+                    className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors text-primary"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">
+                      {copied ? 'check' : 'content_copy'}
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="block text-xs text-gray-500 dark:text-gray-400">Account Name</span>
+                <span className="font-semibold text-gray-900 dark:text-white text-sm">{BANK_DETAILS.accountName}</span>
+              </div>
+            </div>
+          </div>
+
           {submitError && (
             <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 flex gap-3">
               <span className="material-symbols-outlined text-red-600 text-[20px]">error</span>
@@ -491,6 +552,46 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             </div>
           </div>
 
+          {/* Payment Receipt Upload */}
+          <div className="space-y-1.5 mt-4">
+            <label className="text-sm font-semibold text-gray-700 ml-0.5">Payment Receipt (Screenshot/PDF)</label>
+            <div 
+              onClick={() => fileInputRef.current?.click()}
+              className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
+                receiptFile 
+                  ? 'border-primary bg-primary/5 dark:bg-primary/10' 
+                  : 'border-gray-300 dark:border-gray-600 hover:border-primary hover:bg-gray-50 dark:hover:bg-gray-700/50'
+              }`}
+            >
+              <input 
+                type="file" 
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="image/*,.pdf"
+                className="hidden"
+              />
+              
+              {receiptFile ? (
+                <div className="flex items-center justify-center gap-2 text-primary">
+                  <span className="material-symbols-outlined">description</span>
+                  <span className="text-sm font-medium truncate max-w-[200px]">{receiptFile.name}</span>
+                  <span 
+                    className="material-symbols-outlined text-gray-400 hover:text-red-500 ml-2 cursor-pointer"
+                    onClick={(e) => { e.stopPropagation(); setReceiptFile(null); }}
+                  >
+                    close
+                  </span>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-1">
+                  <span className="material-symbols-outlined text-gray-400 text-3xl mb-1">cloud_upload</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Click to upload receipt</span>
+                  <span className="text-xs text-gray-500">Max 5MB (Images or PDF)</span>
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Additional Info/Notice */}
           <div className="p-3 bg-primary/5 rounded-lg border border-primary/10 flex gap-3">
             <span className="material-symbols-outlined text-primary text-[20px]">info</span>
@@ -531,11 +632,6 @@ function App() {
   const [registrationError, setRegistrationError] = useState('');
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [userAllocations, setUserAllocations] = useState(null);
-  
-  // Payment related state
-  const [showPayment, setShowPayment] = useState(false);
-  const [paymentData, setPaymentData] = useState(null);
-  const [conferenceFee] = useState(2500); // ₦1,500 conference fee
 
   useEffect(() => {
     const smoothScrollTo = (targetY, duration) => {
@@ -588,18 +684,7 @@ function App() {
   const [registrationKey, setRegistrationKey] = useState(0);
 
   const handleOpenRegistration = () => {
-    setShowPayment(true); // Show payment modal first
-  };
-
-  const handlePaymentSuccess = (paymentInfo) => {
-    setPaymentData(paymentInfo);
-    setShowPayment(false);
     setShowRegistration(true);
-    setRegistrationKey(prev => prev + 1); // Force remount to reset form state
-  };
-
-  const handleClosePayment = () => {
-    setShowPayment(false);
   };
 
   const handleCloseRegistration = () => {
@@ -609,21 +694,46 @@ function App() {
     setUserAllocations(null);
   };
 
-  const handleSubmitRegistration = async (data) => {
+  const handleSubmitRegistration = async (data, receiptFile) => {
     setRegistrationError('');
     setIsSubmittingRegistration(true);
 
     try {
+      if (!IMGBB_API_KEY) {
+        throw new Error("ImgBB API key is missing. Please configure it in your .env file.");
+      }
+
+      // 1. Upload receipt to ImgBB
+      const imageFormData = new FormData();
+      imageFormData.append("image", receiptFile);
+      
+      const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: "POST",
+        body: imageFormData
+      });
+
+      const imgbbData = await imgbbResponse.json();
+
+      if (!imgbbData.success) {
+        throw new Error("Failed to upload receipt image.");
+      }
+
+      const receiptUrl = imgbbData.data.url;
+
+      // 2. Submit to Web3Forms
       const payload = {
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: 'New NCCF CRS Conference Registration',
+        subject: `New Conference Registration: ${data.fullName}`,
         from_name: 'NCCF CRS Conference Website',
-        // Payment information
-        payment_reference: paymentData?.reference || 'N/A',
-        payment_amount: paymentData?.amount || 0,
-        payment_status: paymentData?.status || 'N/A',
-        // timestamp: new Date().toISOString(),
-        ...data,
+        "Full Name": data.fullName,
+        "Email Address": data.email,
+        "Phone Number": data.phoneNumber,
+        "Gender": data.gender,
+        "Department": data.serviceUnit || "None",
+        "Zone": data.zone,
+        "Batch": data.batch,
+        "Amount Paid": "₦2,500",
+        "Receipt Link": receiptUrl,
       };
 
       const response = await fetch(
@@ -664,8 +774,8 @@ function App() {
   const handleAddToCalendar = () => {
     const now = new Date();
     const dtStamp = formatDateTimeForICS(now);
-    const dtStart = '20261105T180000';
-    const dtEnd = '20261107T160000';
+    const dtStart = '20260604T180000';
+    const dtEnd = '20260607T160000';
 
     // Build detailed description with allocations
     let description = 'Annual state conference themed Missio Dei; ADVANCING THE MISSION OF GOD ON EARTH" (2Cor., 5:20, Matt. 28:19, John 20:21).\\n\\n';
@@ -688,7 +798,7 @@ function App() {
       `DTEND:${dtEnd}`,
       'SUMMARY:NCCF Cross River State Conference 2026',
       `DESCRIPTION:${description}`,
-      'LOCATION:NCCF Family House, Calabar, Cross River State',
+      'LOCATION:Town Hall, Primary Health Centre, Ikot Ansa, Calabar, Cross River State',
       'END:VEVENT',
       'END:VCALENDAR',
     ];
@@ -727,13 +837,6 @@ function App() {
         <Support />
       </main>
       <Footer onRegisterClick={handleOpenRegistration} />
-      <PaymentModal
-        open={showPayment}
-        onClose={handleClosePayment}
-        onPaymentSuccess={handlePaymentSuccess}
-        amount={conferenceFee}
-        publicKey={PAYSTACK_PUBLIC_KEY}
-      />
       
       <RegistrationModal
         key={registrationKey}

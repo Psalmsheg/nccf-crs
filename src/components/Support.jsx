@@ -80,7 +80,7 @@ const Support = () => {
                 </div>
                 <div className="bg-primary/5 p-4 rounded-lg flex items-center gap-3">
                   <span className="material-symbols-outlined text-primary">info</span>
-                  <p className="text-xs text-[#111813]/70 font-medium">Please include "CONFERENCE 2026" as the transaction description.</p>
+                  <p className="text-xs text-[#111813]/70 font-medium">Please include "CRS CONFERENCE 2026" as the transaction description.</p>
                 </div>
               </div>
             </div>

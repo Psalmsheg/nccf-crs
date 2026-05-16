@@ -38,21 +38,21 @@ const Location = () => {
         <div className="text-center mb-12">
           <h2 className="text-[#feab00] text-sm font-extrabold uppercase tracking-widest animate-fade-in">Location</h2>
           <h3 className="text-4xl font-extrabold text-[#111813] mt-2 animate-fade-in animate-delay-100">Event Venue</h3>
-          <p className="text-xl text-[#111813]/70 mt-4 animate-fade-in animate-delay-200">NCCF Family House, Calabar, Cross River State</p>
+          <p className="text-xl text-[#111813]/70 mt-4 animate-fade-in animate-delay-200">Town Hall, Primary Health Centre, Ikot Ansa, Calabar, Cross River State</p>
           <div className="h-1.5 w-20 bg-[#feab00] mx-auto rounded-full mt-4 animate-fade-in animate-delay-300"></div>
         </div>
         <div className="relative group animate-slide-in-left animate-delay-500">
           <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary-dark/20 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
           <div className="relative bg-background-light rounded-[2rem] overflow-hidden shadow-2xl border border-primary/10 aspect-[12/9] md:aspect-[21/9]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.5692283954536!2d8.339793175028792!3d5.010966294965494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105d7d6350a4922f%3A0x77daa6012126e349!2sNCCF%20Family%20House%20Calabar!5e0!3m2!1sen!2sng!4v1771362343276!5m2!1sen!2sng"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d917.3817457847763!2d8.338400713972!3d5.012305677552989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105d7d637b0cac0b%3A0x652efa195b804c00!2sPrimary%20Health%20Centre%2C%20Ikot%20Ansa!5e0!3m2!1sen!2sng!4v1778856500925!5m2!1sen!2sng"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="NCCF Family House Calabar Location"
+              title="Primary Health Centre, Ikot Ansa, Calabar Location"
             ></iframe>
           </div>
         </div>

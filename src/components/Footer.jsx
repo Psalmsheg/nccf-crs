@@ -74,7 +74,12 @@ const Footer = ({ onRegisterClick }) => {
             </div>
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-[#feab00] text-sm mb-2 block">mail</span>
-              <span className="text-sm text-white/70">info@nccfcrossriver.org</span>
+              <a 
+                href="mailto:nccfcrossriver@gmail.com" 
+                className="text-sm text-white/70 hover:text-[#feab00] transition-colors"
+              >
+                nccfcrossriver@gmail.com
+              </a>
             </div>
           </div>
           <div className="flex flex-col gap-1 mt-2">
