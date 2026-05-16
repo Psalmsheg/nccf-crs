@@ -104,7 +104,7 @@ const Schedule = () => {
             {
               time: '10:00AM – 11:30AM',
               program: 'Relationship and Marriage',
-              minister: 'Pastor Keneth Akpet (Peace House)',
+              minister: 'Pastor Joshua Olalekan',
             },
             { time: '11:30AM – 11:40AM', program: 'Announcement and Benediction', minister: 'Assistant Secretary' },
             { time: '11:40AM – 1:30PM', program: 'Brunch / Rest', minister: 'Camp Commandant' },
