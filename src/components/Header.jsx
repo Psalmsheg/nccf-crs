@@ -55,7 +55,7 @@ const Header = ({ onRegisterClick }) => {
           >
             Register Now
           </button>
-          <a className="text-sm font-semibold hover:text-[#feab00] transition-colors" href="#schedule">Conference Schedule</a>
+          <a className="text-sm font-semibold hover:text-primary transition-colors" href="#schedule">Conference Schedule</a>
         </nav>
         <button 
           className="md:hidden text-primary hover:text-primary/80 transition-colors"
