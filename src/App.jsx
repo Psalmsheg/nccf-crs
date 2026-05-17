@@ -63,8 +63,8 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
   };
 
   // Accommodation and Bible Study allocation logic
-  const femaleRooms = ['Flourish Room', 'Love Room', 'Esther Room', 'Ruth Room', 'Deborah Room', 'Mary Room', 'Martha Room', 'Hannah Room', 'Abigail Room', 'Sarah Room'];
-  const maleRooms = ['Kadosh Room', 'Faith Room', 'Grace Room', 'Victory Room', 'Gentleness Room', 'Joseph Room', 'David Room', 'Elijah Room', 'Paul Room', 'Peter Room'];
+  const femaleRooms = ['Flourish Room', 'Love Room', 'GLory Room', 'Glory Room Extension', 'Kadosh Room'];
+  const maleRooms = ['Faith Room', 'Grace Room', 'Victory Room', 'Gentleness Room', 'Joseph Room'];
   const serviceUnits = [
     'Prayer Unit',
     'Protocol Unit',
@@ -209,8 +209,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               Registration Successful!
             </h2>
             <p className="mt-1 text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
-              Thank you for registering for the NCCF Cross River State Conference 2026. You will
-              receive your confirmation details via email.
+              Thank you for registering for the NCCF Cross River State Conference 2026. Please kindly add these details to your calendar.
             </p>
           </div>
 
@@ -313,7 +312,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-4 border border-gray-100 dark:border-gray-600 mb-2 mt-2">
             <div className="flex justify-between items-center mb-2">
               <span className="text-gray-500 text-sm font-semibold">Conference Fee</span>
-              <span className="font-bold text-primary text-xl">₦2,500</span>
+              <span className="font-bold text-primary text-xl">₦5,000</span>
             </div>
             
             <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-600">
@@ -732,7 +731,7 @@ function App() {
         "Department": data.serviceUnit || "None",
         "Zone": data.zone,
         "Batch": data.batch,
-        "Amount Paid": "₦2,500",
+        "Amount Paid": "₦5,000",
         "Receipt Link": receiptUrl,
       };
 
