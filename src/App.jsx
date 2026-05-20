@@ -200,66 +200,70 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-4"
         onClick={handleOverlayClick}
       >
-        <div className="bg-white rounded-2xl max-w-xl w-full shadow-2xl border border-primary/10 text-center px-6 py-8 flex flex-col items-center gap-6">
-          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2 flex-shrink-0">
-            <span className="material-symbols-outlined text-6xl text-primary">check_circle</span>
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white leading-tight">
-              Registration Successful!
-            </h2>
-            <p className="mt-1 text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
-              Thank you for registering for the NCCF Cross River State Conference 2026. Please kindly add these details to your calendar.
-            </p>
-          </div>
-
-          {/* Allocation Information */}
-          {allocations && (
-            <div className="w-full bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">celebration</span>
-                Your Allocations
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="material-symbols-outlined text-primary text-2xl">hotel</span>
-                    <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Accommodation</span>
-                  </div>
-                  <p className="text-xl font-bold text-primary">{allocations.accommodation}</p>
-                </div>
-                <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="material-symbols-outlined text-primary text-2xl">school</span>
-                    <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Bible Study</span>
-                  </div>
-                  <p className="text-xl font-bold text-primary">Bible Study Class {allocations.bibleStudyClass}</p>
-                </div>
-                {allocations.serviceUnit && (
-                  <div className="bg-white/80 rounded-lg p-4 border border-primary/10 md:col-span-2">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="material-symbols-outlined text-primary text-2xl">volunteer_activism</span>
-                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Service Unit</span>
-                    </div>
-                    <p className="text-xl font-bold text-primary">{allocations.serviceUnit}</p>
-                  </div>
-                )}
-              </div>
+        <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col overflow-hidden">
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center gap-6">
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2 flex-shrink-0">
+              <span className="material-symbols-outlined text-6xl text-primary">check_circle</span>
             </div>
-          )}
+            <div className="space-y-2 text-center">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
+                Registration Successful!
+              </h2>
+              <p className="mt-1 text-gray-500 text-sm leading-relaxed max-w-sm mx-auto">
+                Thank you for registering for the NCCF Cross River State Conference 2026. Please kindly add these details to your calendar.
+              </p>
+            </div>
 
-          <div className="w-full flex flex-col gap-3 mt-2">
+            {/* Allocation Information */}
+            {allocations && (
+              <div className="w-full bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+                  <span className="material-symbols-outlined text-primary">celebration</span>
+                  Your Allocations
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
+                    <div className="flex items-center gap-3 mb-2 justify-center">
+                      <span className="material-symbols-outlined text-primary text-2xl">hotel</span>
+                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Accommodation</span>
+                    </div>
+                    <p className="text-xl font-bold text-primary text-center">{allocations.accommodation}</p>
+                  </div>
+                  <div className="bg-white/80 rounded-lg p-4 border border-primary/10">
+                    <div className="flex items-center gap-3 mb-2 justify-center">
+                      <span className="material-symbols-outlined text-primary text-2xl">school</span>
+                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Bible Study</span>
+                    </div>
+                    <p className="text-xl font-bold text-primary text-center">Bible Study Class {allocations.bibleStudyClass}</p>
+                  </div>
+                  {allocations.serviceUnit && (
+                    <div className="bg-white/80 rounded-lg p-4 border border-primary/10 md:col-span-2">
+                      <div className="flex items-center gap-3 mb-2 justify-center">
+                        <span className="material-symbols-outlined text-primary text-2xl">volunteer_activism</span>
+                        <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Service Unit</span>
+                      </div>
+                      <p className="text-xl font-bold text-primary text-center">{allocations.serviceUnit}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Fixed Footer CTAs */}
+          <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex flex-col gap-3 flex-shrink-0 w-full">
             <button
               type="button"
               onClick={onResetSuccess}
-              className="bg-primary hover:bg-primary/90 text-white px-6 py-4 text-sm font-bold rounded-xl w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-3.5 text-sm font-bold rounded-xl w-full shadow-lg shadow-primary/25 transition-all flex items-center justify-center cursor-pointer"
             >
               Continue to portal
             </button>
             <button
               type="button"
               onClick={onAddToCalendar}
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-primary hover:text-primary/90 cursor-pointer"
+              className="flex items-center justify-center gap-2 py-2 text-xs sm:text-sm font-semibold text-primary hover:text-primary/90 cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">event</span>
               <span>Add to my calendar</span>
@@ -277,7 +281,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
     >
       <div className="bg-white rounded-xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col">
         {/* Modal Header */}
-        <div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-primary/10 flex-shrink-0">
+        <div className="px-6 pt-6 pb-4 border-b border-gray-100 flex-shrink-0">
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center">
                 <img src="/Logo.png" alt="NCCF CRS Logo" className="h-10 w-10 rounded-lg" />
@@ -290,7 +294,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <button
               type="button"
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors"
+              className="text-gray-400 hover:text-gray-600 transition-colors"
             >
               <span className="material-symbols-outlined">close</span>
             </button>
@@ -298,7 +302,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 leading-tight text-center">
             Register for CRS Conference 2026
           </h2>
-          <p className="mt-2 text-gray-500 dark:text-gray-400 text-sm">
+          <p className="mt-2 text-gray-500 text-sm">
             Fill in your details below to secure your spot for this year's state conference.
           </p>
         </div>
@@ -309,13 +313,13 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
           <form className="px-6 pb-4 space-y-4" onSubmit={handleSubmit}>
           
           {/* Bank Transfer Instructions */}
-          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-4 border border-gray-100 dark:border-gray-600 mb-2 mt-2">
+          <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 mb-2 mt-2">
             <div className="flex justify-between items-center mb-2">
               <span className="text-gray-500 text-sm font-semibold">Conference Fee</span>
               <span className="font-bold text-primary text-xl">₦5,000</span>
             </div>
             
-            <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-gray-600">
+            <div className="space-y-2 pt-2 border-t border-gray-200">
               <div className="flex justify-between items-center">
                 <span className="block text-sm font-semibold text-gray-500">Bank Name</span>
                 <span className="font-bold text-gray-900 text-md">{BANK_DETAILS.bankName}</span>
@@ -408,7 +412,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">phone</span>
               <input
-                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400"
+                className="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
                 id="phone"
                 placeholder="e.g., +234xxxxxxxxx"
                 type="tel"
@@ -434,7 +438,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">person</span>
               <select
-                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer"
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer"
                 id="gender"
                 value={gender}
                 onChange={(event) => setGender(event.target.value)}
@@ -558,7 +562,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
               onClick={() => fileInputRef.current?.click()}
               className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
                 receiptFile 
-                  ? 'border-primary bg-primary/5 dark:bg-primary/10' 
+                  ? 'border-primary bg-primary/5' 
                   : 'border-gray-300 hover:border-primary hover:bg-gray-50'
               }`}
             >
