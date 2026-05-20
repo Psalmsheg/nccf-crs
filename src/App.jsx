@@ -200,7 +200,7 @@ function RegistrationModal({ open, onClose, onSubmit, isSubmitting, submitError,
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-4"
         onClick={handleOverlayClick}
       >
-        <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] shadow-2xl border border-primary/10 flex flex-col overflow-hidden">
+        <div className="bg-white rounded-2xl max-w-xl w-full max-h-[80vh] shadow-2xl border border-primary/10 flex flex-col overflow-hidden">
           {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center gap-6">
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center shadow-inner shadow-primary/20 mb-2 flex-shrink-0">
